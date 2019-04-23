@@ -12,15 +12,24 @@ function verifier($tableau){
 	}
 	return true;
 }
-if(verifier(['referenceC','titre','ref_fournisseur','quantite'])){
+	
+	if(verifier(['referenceC','titre','ref_fournisseur','quantite','datec'])){
+	$d1=$_POST['datec'];
+	$today=date("Y-m-d");
+	if($d1<=$today)
+	{
+		echo 'erreur date invalide';
+	}
+	else 	{
 
-$commandef1=new Commandef($_POST['referenceC'],$_POST['titre'],$_POST['ref_fournisseur'],$_POST['quantite']);
+$commandef1=new Commandef($_POST['referenceC'],$_POST['titre'],$_POST['ref_fournisseur'],$_POST['quantite'],$_POST['datec']);
 
 $commandef1C=new CommandefC();
+
 $commandef1C->ajouterCommandef($commandef1);
 	
-/*$fournisseur2C=new FournisseurC();
-	$email=$fournisseur2C->recupererEmail($_POST['ref_fournisseur']);
+
+	$email=recupererEmail($_POST['ref_fournisseur']);
 	
 	ini_set('smtp_port', 587);
      $header="MIME-Version: 1.0\r\n";
@@ -30,9 +39,9 @@ $commandef1C->ajouterCommandef($commandef1);
  $message="Cher Mr/Mme, \n commande etablie";
  
  mail($email, "Commande !", $message, $header);
-echo $email['email']; */
-header('Location: ../Commandef.php?operation=ok');		
 
+header('Location: ../Commandef.php?operation=ok');		
+	}
 }
 	
 else{

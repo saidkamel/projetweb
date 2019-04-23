@@ -185,6 +185,7 @@ $Fournisseur1C=new FournisseurC();
 <td>telephone</td>
 <td>email</td>
 <td>type de produit</td>
+<td>Note</td>
 
 </tr>
 
@@ -197,6 +198,7 @@ foreach($listefournisseur as $row){
 	<td><?PHP echo $row['telephone']; ?></td>
 	<td><?PHP echo $row['email']; ?></td>
     <td><?PHP echo $row['type_produit']; ?> </td>
+	  <td><?PHP echo $row['note']; ?> </td>
 	
 	</tr>
 	<?PHP

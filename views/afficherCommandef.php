@@ -180,6 +180,11 @@
 include "../core/commandefC.php";
 
 $Commande1C=new CommandefC();
+ 
+
+$today=date("Y-m-d");
+$Commande1C->supprimerCommandefexpire($today);
+
 $listecommandef=$Commande1C->afficherCommandef();
 
 ?>
@@ -189,6 +194,7 @@ $listecommandef=$Commande1C->afficherCommandef();
 <td>Titre</td>
 <td>Ref fournisseur</td>
 <td>quantite</td>
+<td>date</td>
 
 
 </tr>
@@ -201,6 +207,7 @@ foreach($listecommandef as $row){
 	<td><?PHP echo $row['titre']; ?></td>
 	<td><?PHP echo $row['ref_fournisseur']; ?></td>
 	<td><?PHP echo $row['quantite']; ?></td>
+	<td><?PHP echo $row['datec']; ?></td>
     
 	
 	</tr>

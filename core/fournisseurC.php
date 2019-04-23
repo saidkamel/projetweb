@@ -13,7 +13,7 @@ class FournisseurC
 	}
 	function ajouterFournisseur($fournisseur)
 	{
-		$sql="insert into fournisseur (referenceF,nom,telephone,email,type_produit) values (:referenceF, :nom,:telephone,:email,:type_produit)";
+		$sql="insert into fournisseur (referenceF,nom,telephone,email,type_produit,note) values (:referenceF, :nom,:telephone,:email,:type_produit,:note)";
 		$db = config::getConnexion();
 		try{
         $req=$db->prepare($sql);
@@ -23,12 +23,13 @@ class FournisseurC
         $telephone=$fournisseur->getTelephone();
         $email=$fournisseur->getEmail();
         $type_produit=$fournisseur->getType_produit();
+		$note=$fournisseur->getNote();
 		$req->bindValue(':referenceF',$referenceF);
 		$req->bindValue(':nom',$nom);
 		$req->bindValue(':telephone',$telephone);
 		$req->bindValue(':email',$email);
 		$req->bindValue(':type_produit',$type_produit);
-		
+		$req->bindValue(':note',$note);
            if( $req->execute()){
          	return 1;
          }else{
@@ -64,6 +65,17 @@ $sql="SELECT * from fournisseur ORDER BY referenceF ASC";
             die('Erreur: '.$e->getMessage());
         }
 	}
+	function trierFournisseurparnote(){
+$sql="SELECT * from fournisseur ORDER BY note ASC";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
 	
 	function supprimerFournisseur($referenceF){
 		$sql="DELETE FROM fournisseur where referenceF= '$referenceF'";
@@ -78,6 +90,7 @@ $sql="SELECT * from fournisseur ORDER BY referenceF ASC";
             die('Erreur: '.$e->getMessage());
         }
 	}
+	
 	
 	public static function modifierFournisseur($referenceF,$argument,$valeur){
 		$sql="UPDATE fournisseur SET ".$argument."=:".$argument." WHERE referenceF=:referenceF";
@@ -112,20 +125,22 @@ $sql="SELECT * from fournisseur where referenceF='$referenceF'";
             die('Erreur: '.$e->getMessage());
         }
 	}
+
+	
+}
 function recupererEmail($referenceF){
-		$sql="SELECT email FROM fournisseur where referenceF='$referenceF'";
+		$sql="SELECT * FROM fournisseur where referenceF='$referenceF'";
 
 		$db = config::getConnexion();
 	/*	$req=$db->prepare($sql);
 		$req->bindValue(':referenceF',$referenceF);*/
 		try{
 		$liste=$db->query($sql);
-		return $liste;
+		$user = $liste->fetch();
+		return $user['email'];
 		}
         catch (Exception $e){
             die('Erreur: '.$e->getMessage());
         }
 	}
-	
-}
 ?>

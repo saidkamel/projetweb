@@ -28,6 +28,12 @@ if(isset($_POST["type_produit"])){
 			header('Location: ../Fournisseur.php?operation=update');
 	}
 }
+if(isset($_POST["note"])){
+		if(!empty($_POST["note"])){
+		FournisseurC::modifierFournisseur($_POST["referenceF"],"note",$note);
+			header('Location: ../Fournisseur.php?operation=update');
+	}
+}
 
 
 }

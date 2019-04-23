@@ -15,7 +15,7 @@ class CommandefC
 	
 	function ajouterCommandef($commandef)
 	{
-		$sql="insert into commandef (referenceC,titre,ref_fournisseur,quantite) values (:referenceC, :titre,:ref_fournisseur,:quantite)";
+		$sql="insert into commandef (referenceC,titre,ref_fournisseur,quantite,datec) values (:referenceC, :titre,:ref_fournisseur,:quantite,:datec)";
 		$db = config::getConnexion();
 		try{
         $req=$db->prepare($sql);
@@ -24,10 +24,12 @@ class CommandefC
         $titre=$commandef->getTitre();
         $ref_fournisseur=$commandef->getRef_fournisseur();
         $quantite=$commandef->getQuantite();
+		$datec=$commandef->getdatec();
 		$req->bindValue(':referenceC',$referenceC);
 		$req->bindValue(':titre',$titre);
 		$req->bindValue(':ref_fournisseur',$ref_fournisseur);
 		$req->bindValue(':quantite',$quantite);
+		$req->bindValue(':datec',$datec);
 		
             $req->execute();
            
@@ -54,6 +56,32 @@ class CommandefC
 		$db = config::getConnexion();
         $req=$db->prepare($sql);
 		$req->bindValue(':referenceC',$referenceC);
+		try{
+            $req->execute();
+           // header('Location: index.php');
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
+	function supprimerCommandefexpire($datec){
+		$sql="DELETE FROM commandef where datec < '$datec'";
+		$db = config::getConnexion();
+        $req=$db->prepare($sql);
+		$req->bindValue(':datec',$datec);
+		try{
+            $req->execute();
+           // header('Location: index.php');
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
+	function supprimerCommandefournisseur($referenceF){
+		$sql="DELETE FROM commandef where ref_fournisseur= '$referenceF'";
+		$db = config::getConnexion();
+        $req=$db->prepare($sql);
+		$req->bindValue(':referenceF',$referenceF);
 		try{
             $req->execute();
            // header('Location: index.php');

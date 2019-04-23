@@ -4,6 +4,15 @@ include "core/fournisseurC.php"; ?>
 <html class="no-js">
     
     <head>
+	<style>
+    .error-message {
+        padding: 0 0 0 30px;
+        display: inline;
+        color: #ff5b5b;
+        display: none;
+    
+    }
+    </style>
         <title>Fournisseur</title>
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -16,7 +25,8 @@ include "core/fournisseurC.php"; ?>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script type="text/javascript" src="controlep.js"></script>
+        <script type="text/javascript" src="JS/jquery.min.js"></script>
+		<script type="text/javascript" src="JS/verifajoutfournisseur.js"></script>
     </head>
     <body>
         <div class="navbar navbar-fixed-top">
@@ -194,36 +204,37 @@ include "core/fournisseurC.php"; ?>
                                         <div class="control-group">
                                           <label class="control-label" for="typeahead">Nom du fournisseur <span class="required">*</span></label>
                                           <div class="controls">
-                                            <input type="text" class="span6" id="typeahead"  data-provide="typeahead" data-items="4"  name="nom" required>
-                                            
+                                            <input type="text" class="span6" id="nom"  name="nom" >
+                                            <div class="error-message">erreur</div>
                                           </div>
                                           </div>
                                           <br />
                                           <div class="control-group">
                                           <label class="control-label" for="typeahead">Reference<span class="required">*</span></label>
                                           <div class="controls">
-                                            <input type="number" class="span6"   data-provide="typeahead" data-items="4" name="referenceF" required>
-                                            
+                                            <input type="number" class="span6"  id="referenceF"  name="referenceF" >
+                                            <div class="error-message">erreur</div>
                                           </div>
 										  
                                         </div>
 										<div class="control-group">
 											<label class="control-label">Email<span class="required">*</span></label>
 												<div class="controls">
-													<input name="email" type="email" class="span6 m-wrap" required />
+													<input name="email" type="email" class="span6 m-wrap" id="mail" />
+													<div class="error-message">erreur</div>
 												</div>
 											</div>
                                             <div class="control-group">
                                           <label class="control-label" for="select01">Type de produit<span class="required">*</span></label>
                                           <div class="controls">
-                                            <select  class="chzn-select"  name="type_produit" required>
-                                                <option> Sélectionnez</option>
+                                            <select  class="chzn-select"  name="type_produit" id="type_prod">
+                                                <option >selectionnez</option>
 												<option>Vêtements Homme</option>
 												<option>Vêtements Femme</option>
 												<option>Matériel</option>
 												<option>Accessoires</option>
                                             </select>
-                                          
+                                        
                                           </div>
                                         </div>
                                        
@@ -231,16 +242,22 @@ include "core/fournisseurC.php"; ?>
                                         <div class="control-group">
                                           <label class="control-label" for="typeahead">Telephone<span class="required">*</span></label>
                                           <div class="controls">
-                                            <input type="number" class="span6" id="price"  data-provide="typeahead" data-items="4" name="telephone" step=0.5 required>
-                                            
+                                            <input type="number" class="span6" id="telephone"  name="telephone"  >
+                                            <div class="error-message">erreur</div>
                                           </div>
                                         </div>
-                                        
+                                        <div class="control-group">
+											<label class="control-label">Note<span class="required">*</span></label>
+												<div class="controls">
+													<input name="note" type="number" id="note" class="span6 m-wrap"  />
+												<div class="error-message">erreur</div>
+												</div>
+											</div>
                                        
                                    
                                         
                                         <div class="form-actions">
-                                          <button  type="submit" name="ajouter" value="ajouter" onclick="envoyer();" class="btn btn-primary">Ajouter</button>
+                                          <button  type="submit" name="ajouter" value="ajouter" id="butajout" class="btn btn-primary">Ajouter</button>
                                           <button type="reset" class="btn">Annuler</button>
                                         </div>
                                       </fieldset>
@@ -303,7 +320,7 @@ foreach($listefournisseur as $row){
                                           <div class="control-group">
                                           <label class="control-label" for="typeahead">Nom</label>
                                           <div class="controls">
-                                            <input type="text" class="span6" id="typeahead" name="nom" data-provide="typeahead" >
+                                            <input type="text" class="span6" id="nom" name="nom" data-provide="typeahead" >
                                           </div>
 
                                         </div>
@@ -323,22 +340,30 @@ foreach($listefournisseur as $row){
 									<div class="control-group">
                                           <label class="control-label" for="typeahead">Email</label>
                                           <div class="controls">
-                                            <input type="email" class="span6" id="typeahead" name="email" data-provide="typeahead" >
+                                            <input type="email" class="span6" id="mail" name="email" data-provide="typeahead" >
                                           </div>
 
                                         </div>
                                         <div class="control-group">
                                           <label class="control-label" for="typeahead">telephone</label>
                                           <div class="controls">
-                                            <input type="number" class="span6" id="typeahead" name="telephone" data-provide="typeahead" >
+                                            <input type="number" class="span6" id="telephone" name="telephone" data-provide="typeahead" >
+											<div class="error-message">erreur</div>
                                           </div>
 
                                         </div>
-
+											
+											<div class="control-group">
+											<label class="control-label">Note<span class="required">*</span></label>
+												<div class="controls">
+													<input name="note" type="number" class="span6 m-wrap" id="note" />
+													<div class="error-message">erreur</div>
+												</div>
+											</div>
                                        
 
                                         <div class="form-actions">
-                                          <button type="submit" onclick="envoyermodifier();" class="btn btn-primary" name="modifier" value="modifier">Modifier</button>
+                                          <button type="submit" id="butmodif" class="btn btn-primary" name="modifier" value="modifier">Modifier</button>
                                           <button type="reset" class="btn">Annuler</button>
                                         </div>
                                       </fieldset>

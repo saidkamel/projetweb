@@ -6,14 +6,16 @@ class Fournisseur
 	private $telephone;
 	private $email;
 	private $type_produit;
+	private $note;
 	
-	function __construct($referenceF,$nom,$telephone,$mail,$type_produit)
+	function __construct($referenceF,$nom,$telephone,$mail,$type_produit,$note)
 	{
 		$this->referenceF=$referenceF;
 		$this->nom=$nom;
 		$this->telephone=$telephone;
 		$this->email=$mail;
 		$this->type_produit=$type_produit;
+		$this->note=$note;
 		
 	}
 	
@@ -37,6 +39,10 @@ class Fournisseur
 	{
 		return $this->type_produit;
 	}
+	function getNote()
+	{
+		return $this->note;
+	}
 	
 	function setNom($nom)
 	{
@@ -53,6 +59,10 @@ class Fournisseur
 	function setType_produit($type_produit)
 	{
 		$this->type_produit=$type_produit;
+	}
+	function setNote($note)
+	{
+		$this->note=$note;
 	}
 }
 ?>

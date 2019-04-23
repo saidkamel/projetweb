@@ -21,5 +21,11 @@ if(isset($_POST["quantite"])){
 			header('Location: ../Commandef.php?operation=update');
 	}
 	}
+if(isset($_POST["datec"])){
+	if(!empty($_POST["datec"])){
+		CommandefC::modifierCommandef($_POST["referenceC"],"datec",$datec);
+			header('Location: ../Commandef.php?operation=update');
+	}
+	}
 }
 ?>

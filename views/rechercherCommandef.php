@@ -191,6 +191,7 @@ if (isset($_GET["referenceC"])){
 <td>Titre</td>
 <td>Ref fournisseur</td>
 <td>quantite</td>
+<td>datec</td>
 
 
 </tr>
@@ -203,6 +204,7 @@ foreach($listecommandef as $row){
 	<td><?PHP echo $row['titre']; ?></td>
 	<td><?PHP echo $row['ref_fournisseur']; ?></td>
 	<td><?PHP echo $row['quantite']; ?></td>
+	<td><?PHP echo $row['datec']; ?></td>
     
 	
 	</tr>

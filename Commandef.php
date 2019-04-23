@@ -19,7 +19,7 @@ include "core/fournisseurC.php";
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script type="text/javascript" src="controlep.js"></script>
+        <script type="text/javascript" src="verifdate.js"></script>
     </head>
     <body>
         <div class="navbar navbar-fixed-top">
@@ -201,7 +201,7 @@ include "core/fournisseurC.php";
 										  <div class="control-group">
                                           <label class="control-label" for="typeahead">Reference Commande <span class="required">*</span></label>
                                           <div class="controls">
-                                            <input type="number" class="span6" id="typeahead"  data-provide="typeahead" data-items="4"  name="referenceC" required>
+                                            <input type="number" class="span6" id="typeahead"   name="referenceC" required>
                                             
                                           </div>
                                           </div>
@@ -216,7 +216,7 @@ include "core/fournisseurC.php";
 				<?PHP
 
 $Fournisseur1C=new FournisseurC();
-$listefournisseur=$Fournisseur1C->afficherFournisseur();
+$listefournisseur=$Fournisseur1C->trierFournisseurparnote();
 
 ?>
 
@@ -240,7 +240,14 @@ foreach($listefournisseur as $row){
 										
 										 <!-- referenceC -->
 										
-										
+										<div class="control-group">
+                                          <label class="control-label" for="typeahead">Date de commande <span class="required">*</span></label>
+                                          <div class="controls">
+                                            <input type="date" class="span6" id="controledate"  data-provide="typeahead" data-items="4"  name="datec" required>
+                                            
+                                          </div>
+                                          </div>
+                                          <br />
 										<div class="control-group">
 											<label class="control-label">Quantite <span class="required">*</span></label>
 												<div class="controls">
@@ -256,7 +263,7 @@ foreach($listefournisseur as $row){
                                    
                                         
                                         <div class="form-actions">
-                                          <button  type="submit" name="ajouter" value="ajouter" onclick="envoyer();" class="btn btn-primary">Ajouter</button>
+                                          <button  type="submit" name="ajouter" value="ajouter" onclick=" envoyer();" class="btn btn-primary">Ajouter</button>
                                           <button type="reset" class="btn">Annuler</button>
                                         </div>
                                       </fieldset>
@@ -356,7 +363,14 @@ foreach($listefournisseur as $row){
 										
 										 <!--  reference fournisseur  -->
 									   
-									   
+									   <div class="control-group">
+                                          <label class="control-label" for="typeahead">Date de commande </label>
+                                          <div class="controls">
+                                            <input type="date" class="span6" id="typeahead"  data-provide="typeahead" data-items="4"  name="datec" >
+                                            
+                                          </div>
+                                          </div>
+                                          <br />
 										<div class="control-group">
 											<label class="control-label">Quantite</label>
 												<div class="controls">

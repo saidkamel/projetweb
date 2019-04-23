@@ -5,14 +5,16 @@ class Commandef
 	private $titre;
 	private $ref_fournisseur;
 	private $quantite;
+	private $datec;
 	
 	
-	function __construct($referenceC,$titre,$ref_fournisseur,$quantite)
+	function __construct($referenceC,$titre,$ref_fournisseur,$quantite,$datec)
 	{
 		$this->referenceC=$referenceC;
 		$this->titre=$titre;
 		$this->ref_fournisseur=$ref_fournisseur;
 		$this->quantite=$quantite;
+		$this->datec=$datec;
 		
 		
 	}
@@ -33,6 +35,10 @@ class Commandef
 	{
 		return $this->quantite;
 	}
+	function getdatec()
+	{
+		return $this->datec;
+	}
 	
 	
 	function setTitre($titre)
@@ -46,6 +52,10 @@ class Commandef
 	function setQuantite($quantite)
 	{
 		$this->quantite=$quantite;
+	}
+	function setdatec($datec)
+	{
+		$this->datec=$datec;
 	}
 }
 ?>
