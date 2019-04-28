@@ -1,4 +1,11 @@
+<?PHP 
+session_start();
+if (empty($_SESSION['l'])) {
+    header("location:login.html");
+}
+else {
 
+?>
 <!DOCTYPE html>
 <html class="no-js">
     
@@ -29,7 +36,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Said Kamel<i class="caret"></i>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> <?PHP echo $_SESSION['l'] ;?><i class="caret"></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -38,7 +45,7 @@
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a tabindex="-1" href="../login.html">Logout</a>
+                                        <a tabindex="-1" href="logout.php">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -190,8 +197,9 @@ if (isset($_GET["referenceC"])){
 <td>Reference Commande</td>
 <td>Titre</td>
 <td>Ref fournisseur</td>
-<td>quantite</td>
-<td>datec</td>
+<td>Quantite</td>
+<td>Date</td>
+<td>Etat</td>
 
 
 </tr>
@@ -205,6 +213,7 @@ foreach($listecommandef as $row){
 	<td><?PHP echo $row['ref_fournisseur']; ?></td>
 	<td><?PHP echo $row['quantite']; ?></td>
 	<td><?PHP echo $row['datec']; ?></td>
+	<td><?PHP echo $row['etat']; ?></td>
     
 	
 	</tr>
@@ -244,6 +253,7 @@ foreach($listecommandef as $row){
             
         });
         </script>
+<?php} ?>
     </body>
 
 </html>

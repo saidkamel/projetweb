@@ -7,8 +7,9 @@ class Fournisseur
 	private $email;
 	private $type_produit;
 	private $note;
+	private $retard;
 	
-	function __construct($referenceF,$nom,$telephone,$mail,$type_produit,$note)
+	function __construct($referenceF,$nom,$telephone,$mail,$type_produit,$note,$retard)
 	{
 		$this->referenceF=$referenceF;
 		$this->nom=$nom;
@@ -16,6 +17,7 @@ class Fournisseur
 		$this->email=$mail;
 		$this->type_produit=$type_produit;
 		$this->note=$note;
+		$this->retard=$retard;
 		
 	}
 	
@@ -43,6 +45,10 @@ class Fournisseur
 	{
 		return $this->note;
 	}
+	function getRetard()
+	{
+		return $this->retard;
+	}
 	
 	function setNom($nom)
 	{
@@ -63,6 +69,10 @@ class Fournisseur
 	function setNote($note)
 	{
 		$this->note=$note;
+	}
+	function setRetard($retard)
+	{
+		$this->retard=$retard;
 	}
 }
 ?>

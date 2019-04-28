@@ -13,16 +13,20 @@
   <body id="login">
     <div class="container">
 
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input id="mail" type="text" class="input-block-level" placeholder="Email address" name="mail">
-        <input id="pwd" type="password" class="input-block-level" placeholder="Password" name="pwd">
-        <label class="checkbox">
+      <form class="form-signin" id="form1" name="form1" method="POST" action="connexion.php">
+  <h2 class="form-signin-heading">Please sign in</h2>
+    <input type="text" class="input-block-level" placeholder="Login" name="loginn" id="loginn" />
+ 
+ 
+    <input type="password" class="input-block-level" placeholder="Mot de passe" name="pwd" id="pwd" />
+  
+  <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-            <button onclick="test();" class="btn btn-large btn-primary" type="button">Sign in</button>
-      </form>
-
+  <p>
+    <input type="submit" name="button" id="button" value="Connecter" class="btn btn-large btn-primary" />
+  </p>
+</form>
     </div> <!-- /container -->
     <script src="vendors/jquery-1.9.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>

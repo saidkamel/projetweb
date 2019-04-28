@@ -15,7 +15,7 @@ class CommandefC
 	
 	function ajouterCommandef($commandef)
 	{
-		$sql="insert into commandef (referenceC,titre,ref_fournisseur,quantite,datec) values (:referenceC, :titre,:ref_fournisseur,:quantite,:datec)";
+		$sql="insert into commandef (referenceC,titre,ref_fournisseur,quantite,datec,etat) values (:referenceC, :titre,:ref_fournisseur,:quantite,:datec,:etat)";
 		$db = config::getConnexion();
 		try{
         $req=$db->prepare($sql);
@@ -25,11 +25,13 @@ class CommandefC
         $ref_fournisseur=$commandef->getRef_fournisseur();
         $quantite=$commandef->getQuantite();
 		$datec=$commandef->getdatec();
+		$etat=$commandef->getetat();
 		$req->bindValue(':referenceC',$referenceC);
 		$req->bindValue(':titre',$titre);
 		$req->bindValue(':ref_fournisseur',$ref_fournisseur);
 		$req->bindValue(':quantite',$quantite);
 		$req->bindValue(':datec',$datec);
+		$req->bindValue(':etat',$etat);
 		
             $req->execute();
            

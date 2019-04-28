@@ -1,4 +1,11 @@
-<?PHP 
+<?PHP
+
+ 
+session_start();
+if (empty($_SESSION['l'])) {
+    header("location:login.html");
+}
+else {
 include "core/fournisseurC.php"; ?>
 <!DOCTYPE html>
 <html class="no-js">
@@ -40,7 +47,7 @@ include "core/fournisseurC.php"; ?>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>  Said Kamel<i class="caret"></i>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> <?PHP echo $_SESSION['l'] ;?> <i class="caret"></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -49,7 +56,7 @@ include "core/fournisseurC.php"; ?>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a tabindex="-1" href="login.html">Logout</a>
+                                        <a tabindex="-1" href="logout.php">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -233,13 +240,16 @@ include "core/fournisseurC.php"; ?>
 												<option>Vêtements Femme</option>
 												<option>Matériel</option>
 												<option>Accessoires</option>
+												
                                             </select>
-                                        
+                                         <div class="error-message">erreur</div>
                                           </div>
+										 
                                         </div>
                                        
                                             
                                         <div class="control-group">
+										
                                           <label class="control-label" for="typeahead">Telephone<span class="required">*</span></label>
                                           <div class="controls">
                                             <input type="number" class="span6" id="telephone"  name="telephone"  >
@@ -334,13 +344,14 @@ foreach($listefournisseur as $row){
                                               <option>Matériel</option>
                                               <option>Accessoires</option>
                                             </select>
-                                          
+                                           <div class="error-message">erreur</div>
                                           </div>
                                         </div>
 									<div class="control-group">
                                           <label class="control-label" for="typeahead">Email</label>
                                           <div class="controls">
                                             <input type="email" class="span6" id="mail" name="email" data-provide="typeahead" >
+											 <div class="error-message">erreur</div>
                                           </div>
 
                                         </div>
@@ -348,6 +359,7 @@ foreach($listefournisseur as $row){
                                           <label class="control-label" for="typeahead">telephone</label>
                                           <div class="controls">
                                             <input type="number" class="span6" id="telephone" name="telephone" data-provide="typeahead" >
+											
 											<div class="error-message">erreur</div>
                                           </div>
 
@@ -363,7 +375,7 @@ foreach($listefournisseur as $row){
                                        
 
                                         <div class="form-actions">
-                                          <button type="submit" id="butmodif" class="btn btn-primary" name="modifier" value="modifier">Modifier</button>
+                                          <button type="submit"  class="btn btn-primary" name="modifier" value="modifier" id="butmodif">Modifier</button>
                                           <button type="reset" class="btn">Annuler</button>
                                         </div>
                                       </fieldset>
@@ -491,6 +503,7 @@ foreach($listefournisseur as $row){
             });
         });
         </script>
+<?PHP } ?>
     </body>
 
 </html>

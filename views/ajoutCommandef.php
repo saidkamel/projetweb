@@ -22,8 +22,9 @@ function verifier($tableau){
 	}
 	else 	{
 
-$commandef1=new Commandef($_POST['referenceC'],$_POST['titre'],$_POST['ref_fournisseur'],$_POST['quantite'],$_POST['datec']);
-
+$commandef1=new Commandef($_POST['referenceC'],$_POST['titre'],$_POST['ref_fournisseur'],$_POST['quantite'],$_POST['datec'],"non arrivée");
+$q1=$_POST['quantite'];
+$r1=$_POST['referenceC'];
 $commandef1C=new CommandefC();
 
 $commandef1C->ajouterCommandef($commandef1);
@@ -33,12 +34,38 @@ $commandef1C->ajouterCommandef($commandef1);
 	
 	ini_set('smtp_port', 587);
      $header="MIME-Version: 1.0\r\n";
- $header.='From:"Casasport.tn"<Casasport.tn>'."\n";
+ $header.='From:"BoutiqueCasaSport.tn"<BoutiqueCasaSport.tn>'."\n";
  $header.='Content-Type:text/html; charset="uft-8"'."\n";
  $header.='Content-Transfer-Encoding: 8bit';
- $message="Cher Mr/Mme, \n commande etablie";
+ $message='
+ <html>
+	<body>
+		<div align="left">
+		cher Mr/Mme, <br/> Commande etablie avec succé <br/> Details: 
+		
+		</div>
+	</body>
+</html>
  
- mail($email, "Commande !", $message, $header);
+ 
+ ';
+ $message.=  ' Référence Commande : '.$r1 ;
+ $message.='
+ <html>
+	<br/>
+</html>
+ ';
+ $message.=  ' Quantité : '.$q1 ;
+ $message.='
+ <html>
+	<br/>
+</html>
+ ';
+ $message.=  ' pour le : '.$d1 ;
+ 
+ 
+ 
+ mail($email, "Commande Boutique Casa Sport!", $message, $header);
 
 header('Location: ../Commandef.php?operation=ok');		
 	}

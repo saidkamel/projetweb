@@ -1,10 +1,24 @@
 <?PHP 
+session_start();
+if (empty($_SESSION['l'])) {
+    header("location:login.html");
+}
+else {
 include "core/commandefC.php";
 include "core/fournisseurC.php"; 
 ?>
 
 <!DOCTYPE html>
 <html class="no-js">
+<style>
+    .error-message {
+        padding: 0 0 0 30px;
+        display: inline;
+        color: #ff5b5b;
+        display: none;
+    
+    }
+    </style>
     
     <head>
         <title>Commandes fournisseur</title>
@@ -20,6 +34,8 @@ include "core/fournisseurC.php";
         <![endif]-->
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script type="text/javascript" src="verifdate.js"></script>
+		<script type="text/javascript" src="JS/jquery.min.js"></script>
+		<script type="text/javascript" src="JS/verifajoutcommande.js"></script>
     </head>
     <body>
         <div class="navbar navbar-fixed-top">
@@ -33,7 +49,7 @@ include "core/fournisseurC.php";
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Said Kamel<i class="caret"></i>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> <?PHP echo $_SESSION['l'] ;?> <i class="caret"></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -42,7 +58,7 @@ include "core/fournisseurC.php";
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a tabindex="-1" href="login.html">Logout</a>
+                                        <a tabindex="-1" href="logout.php">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -193,16 +209,16 @@ include "core/fournisseurC.php";
                                         <div class="control-group">
                                           <label class="control-label" for="typeahead">Titre <span class="required">*</span><small> (Objet)</small></label>
                                           <div class="controls">
-                                            <input type="text" class="span6" id="typeahead"  data-provide="typeahead" data-items="4"  name="titre" required>
-                                            
+                                            <input type="text" class="span6" id="titre"    name="titre" >
+                                            <div class="error-message">erreur</div>
                                           </div>
                                           </div>
                                           <br />
 										  <div class="control-group">
                                           <label class="control-label" for="typeahead">Reference Commande <span class="required">*</span></label>
                                           <div class="controls">
-                                            <input type="number" class="span6" id="typeahead"   name="referenceC" required>
-                                            
+                                            <input type="number" class="span6" id="referenceC"   name="referenceC" required>
+                                             <div class="error-message">erreur</div>
                                           </div>
                                           </div>
                                           <br />
@@ -251,7 +267,8 @@ foreach($listefournisseur as $row){
 										<div class="control-group">
 											<label class="control-label">Quantite <span class="required">*</span></label>
 												<div class="controls">
-													<input name="quantite" type="number" class="span6 m-wrap" required />
+													<input name="quantite" type="number" class="span6 m-wrap" id="quantite" />
+													<div class="error-message">erreur</div>
 												</div>
 											</div>
                                            
@@ -263,7 +280,7 @@ foreach($listefournisseur as $row){
                                    
                                         
                                         <div class="form-actions">
-                                          <button  type="submit" name="ajouter" value="ajouter" onclick=" envoyer();" class="btn btn-primary">Ajouter</button>
+                                          <button  type="submit" name="ajouter" value="ajouter" id="butajoutc" class="btn btn-primary">Ajouter</button>
                                           <button type="reset" class="btn">Annuler</button>
                                         </div>
                                       </fieldset>
@@ -364,9 +381,9 @@ foreach($listefournisseur as $row){
 										 <!--  reference fournisseur  -->
 									   
 									   <div class="control-group">
-                                          <label class="control-label" for="typeahead">Date de commande </label>
+                                          <label class="control-label" >Date de commande </label>
                                           <div class="controls">
-                                            <input type="date" class="span6" id="typeahead"  data-provide="typeahead" data-items="4"  name="datec" >
+                                            <input type="date" class="span6" id="datec"  data-provide="typeahead" data-items="4"  name="datec" >
                                             
                                           </div>
                                           </div>
@@ -375,6 +392,17 @@ foreach($listefournisseur as $row){
 											<label class="control-label">Quantite</label>
 												<div class="controls">
 													<input name="quantite" type="number" class="span6 m-wrap"  />
+												</div>
+											</div>
+										<div class="control-group">
+											<label class="control-label">Etat</label>
+												<div class="controls">
+													<select  class="chzn-select"  name="etat" id="etat">
+                                                <option>Non Arrivée</option>
+												<option>Arrivée</option>
+												
+												
+                                            </select>
 												</div>
 											</div>
                                         <div class="form-actions">
@@ -508,6 +536,7 @@ foreach($listecommandef as $row){
             });
         });
         </script>
+<?php } ?>
     </body>
 
 </html>

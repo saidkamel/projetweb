@@ -70,7 +70,7 @@ $(function(){
 return valid;
      });
 	 
-	 $("#butmodif").click(function()
+	$("#butmodif").click(function()
      { valid=true;
 	 
 	  if(($("#note").val() < 0 ) || ($("#note").val() > 6 ))

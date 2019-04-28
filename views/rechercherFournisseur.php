@@ -1,4 +1,11 @@
+<?PHP 
+session_start();
+if (empty($_SESSION['l'])) {
+    header("location:login.html");
+}
+else {
 
+?>
 <!DOCTYPE html>
 <html class="no-js">
     
@@ -29,7 +36,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Said Kamel<i class="caret"></i>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> <?PHP echo $_SESSION['l'] ;?><i class="caret"></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -38,7 +45,7 @@
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a tabindex="-1" href="../login.html">Logout</a>
+                                        <a tabindex="-1" href="logout.php">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -192,6 +199,7 @@ if (isset($_GET["referenceF"])){
 <td>Email</td>
 <td>Type de produit</td>
 <td>Note</td>
+<td>Retard</td>
 
 </tr>
 
@@ -204,7 +212,8 @@ foreach($listefournisseur as $row){
 	<td><?PHP echo $row['telephone']; ?></td>
 	<td><?PHP echo $row['email']; ?></td>
     <td><?PHP echo $row['type_produit']; ?> </td>
-  <td><?PHP echo $row['note']; ?> </td>
+	<td><?PHP echo $row['note']; ?> </td>
+	<td><?PHP echo $row['retard']; ?> </td>
 	
 	</tr>
 	<?PHP
@@ -243,6 +252,7 @@ foreach($listefournisseur as $row){
             
         });
         </script>
+<?php } ?>
     </body>
 
 </html>

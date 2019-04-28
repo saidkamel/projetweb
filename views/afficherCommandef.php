@@ -1,9 +1,16 @@
+<?php
 
+session_start();
+if (empty($_SESSION['l'])) {
+    header("location:login.html");
+}
+else {
+?>
 <!DOCTYPE html>
 <html class="no-js">
     
     <head>
-        <title>Produit</title>
+        <title>Commande Fournisseur</title>
         <!-- Bootstrap -->
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -29,7 +36,7 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
                             <li class="dropdown">
-                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>  Said Kamel<i class="caret"></i>
+                                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i>  <?PHP echo $_SESSION['l'] ;?> <i class="caret"></i>
 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -38,7 +45,7 @@
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a tabindex="-1" href="login.html">Logout</a>
+                                        <a tabindex="-1" href="logout.php">Logout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -193,8 +200,9 @@ $listecommandef=$Commande1C->afficherCommandef();
 <td>Reference Commande</td>
 <td>Titre</td>
 <td>Ref fournisseur</td>
-<td>quantite</td>
-<td>date</td>
+<td>Quantite</td>
+<td>Date</td>
+<td>Etat</td>
 
 
 </tr>
@@ -208,6 +216,7 @@ foreach($listecommandef as $row){
 	<td><?PHP echo $row['ref_fournisseur']; ?></td>
 	<td><?PHP echo $row['quantite']; ?></td>
 	<td><?PHP echo $row['datec']; ?></td>
+	<td><?PHP echo $row['etat']; ?></td>
     
 	
 	</tr>
@@ -239,6 +248,7 @@ foreach($listecommandef as $row){
             
         });
         </script>
-    </body>
+<?php }?>   
+   </body>
 
 </html>

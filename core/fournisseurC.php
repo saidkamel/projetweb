@@ -13,7 +13,7 @@ class FournisseurC
 	}
 	function ajouterFournisseur($fournisseur)
 	{
-		$sql="insert into fournisseur (referenceF,nom,telephone,email,type_produit,note) values (:referenceF, :nom,:telephone,:email,:type_produit,:note)";
+		$sql="insert into fournisseur (referenceF,nom,telephone,email,type_produit,note,retard) values (:referenceF, :nom,:telephone,:email,:type_produit,:note,:retard)";
 		$db = config::getConnexion();
 		try{
         $req=$db->prepare($sql);
@@ -24,12 +24,14 @@ class FournisseurC
         $email=$fournisseur->getEmail();
         $type_produit=$fournisseur->getType_produit();
 		$note=$fournisseur->getNote();
+		$retard=$fournisseur->getRetard();
 		$req->bindValue(':referenceF',$referenceF);
 		$req->bindValue(':nom',$nom);
 		$req->bindValue(':telephone',$telephone);
 		$req->bindValue(':email',$email);
 		$req->bindValue(':type_produit',$type_produit);
 		$req->bindValue(':note',$note);
+		$req->bindValue(':retard',$retard);
            if( $req->execute()){
          	return 1;
          }else{
