@@ -201,6 +201,13 @@ include "core/fournisseurC.php";
                             The operation completed successfully</div>';
                             
                                     }
+									else if(isset($_GET["operation"]) && $_GET["operation"]=="erdate"){
+                                        echo '<div class="alert alert-error alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <h4>Erreur</h4>
+                            Date Invalide</div>';
+                            
+                                    }
 
                                     ?>
                                    <form method="POST" action="views/ajoutCommandef.php" enctype="multipart/form-data">
@@ -240,7 +247,7 @@ $listefournisseur=$Fournisseur1C->trierFournisseurparnote();
 foreach($listefournisseur as $row){
     ?>
 
-<?PHP echo "<option value='".$row['referenceF']."' class='active-result'>".$row['referenceF']."</option>"; ?>
+<?PHP echo "<option value='".$row['referenceF']."' class='active-result'>".$row['referenceF']."-Note:".$row['note']."</option>"; ?>
 
     <?PHP
 }
@@ -257,7 +264,7 @@ foreach($listefournisseur as $row){
 										 <!-- referenceC -->
 										
 										<div class="control-group">
-                                          <label class="control-label" for="typeahead">Date de commande <span class="required">*</span></label>
+                                          <label class="control-label" >Date de commande <span class="required">*</span></label>
                                           <div class="controls">
                                             <input type="date" class="span6" id="controledate"  data-provide="typeahead" data-items="4"  name="datec" required>
                                             
@@ -272,19 +279,19 @@ foreach($listefournisseur as $row){
 												</div>
 											</div>
                                            
-                                       
-                                            
-                                       
-                                        
-                                       
-                                   
-                                        
                                         <div class="form-actions">
                                           <button  type="submit" name="ajouter" value="ajouter" id="butajoutc" class="btn btn-primary">Ajouter</button>
                                           <button type="reset" class="btn">Annuler</button>
+										  
+										  
+										  
+										  
+										  
                                         </div>
                                       </fieldset>
                                 </form>
+								
+								
 
                                 </div>
                             </div>

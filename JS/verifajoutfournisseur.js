@@ -65,7 +65,11 @@ $(function(){
           $("#telephone").next(".error-message").fadeOut();
          }
 	
-	
+	if(valid==true)
+	{
+		
+		
+	}
 	
 return valid;
      });

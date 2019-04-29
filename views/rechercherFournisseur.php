@@ -155,7 +155,7 @@ else {
                 <form method="GET" action="rechercherFournisseur.php">
                                           <label class="control-label" for="typeahead">Référence Du fournisseur</label>
                                           <div class="controls">
-                                            <input type="number" class="span6" id="typeahead" name="referenceF" required data-provide="typeahead" >
+                                            <input type="text" class="span6"  name="referenceF" required  >
                                              <button type="submit" name="Rechercher" value="Rechercher" class="btn btn-info">Rechercher</button>
                 
                                           </div>
@@ -184,7 +184,7 @@ else {
   include "../core/fournisseurC.php";                                  
 $fournisseur1C=new FournisseurC();
 if (isset($_GET["referenceF"])){
-	$listefournisseur=$fournisseur1C->rechercherFournisseur($_GET["referenceF"]);
+	$listefournisseur=$fournisseur1C->rechercherFournisseur2($_GET["referenceF"]);
 }
 
 

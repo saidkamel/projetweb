@@ -1,3 +1,4 @@
+
 <?PHP
 include "../entities/fournisseur.php";
 include "../core/fournisseurC.php";
@@ -10,7 +11,8 @@ function verifier($tableau){
 	}
 	return true;
 }
-if(verifier(['referenceF','nom' ,'telephone','email','type_produit','note'])){
+if(verifier(['referenceF','nom' ,'telephone','email','type_produit','note']))
+{
 	
 $fournisseur1=new fournisseur($_POST['referenceF'],$_POST['nom'],$_POST['telephone'],$_POST['email'],$_POST['type_produit'],$_POST['note'],0);
 
@@ -34,5 +36,6 @@ else
 	echo "vérifier les champs";
 }
 //*/
+
 
 ?>

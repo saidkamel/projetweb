@@ -16,9 +16,9 @@ function verifier($tableau){
 	if(verifier(['referenceC','titre','ref_fournisseur','quantite','datec'])){
 	$d1=$_POST['datec'];
 	$today=date("Y-m-d");
-	if($d1<=$today)
+	if($d1 <= $today)
 	{
-		echo 'erreur date invalide';
+		header('Location: ../Commandef.php?operation=erdate');	
 	}
 	else 	{
 

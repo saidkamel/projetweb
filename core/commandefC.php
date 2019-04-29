@@ -79,6 +79,19 @@ class CommandefC
             die('Erreur: '.$e->getMessage());
         }
 	}
+	function incDatec($referenceC){
+		$sql="update commandef set datec = datec+1 where referenceC= '$referenceC'";
+		$db = config::getConnexion();
+        $req=$db->prepare($sql);
+		$req->bindValue(':referenceC',$referenceC);
+		try{
+            $req->execute();
+           // header('Location: index.php');
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
 	function supprimerCommandefournisseur($referenceF){
 		$sql="DELETE FROM commandef where ref_fournisseur= '$referenceF'";
 		$db = config::getConnexion();

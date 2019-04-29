@@ -68,7 +68,7 @@ $sql="SELECT * from fournisseur ORDER BY referenceF ASC";
         }
 	}
 	function trierFournisseurparnote(){
-$sql="SELECT * from fournisseur ORDER BY note ASC";
+$sql="SELECT * from fournisseur ORDER BY note DESC";
 		$db = config::getConnexion();
 		try{
 		$liste=$db->query($sql);
@@ -92,7 +92,32 @@ $sql="SELECT * from fournisseur ORDER BY note ASC";
             die('Erreur: '.$e->getMessage());
         }
 	}
-	
+	function resetRetard($referenceF){
+		$sql="update fournisseur set retard = 0 where referenceF= '$referenceF'";
+		$db = config::getConnexion();
+        $req=$db->prepare($sql);
+		$req->bindValue(':referenceF',$referenceF);
+		try{
+            $req->execute();
+           // header('Location: index.php');
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
+	function incRetard($referenceF){
+		$sql="update fournisseur set retard = retard+1 where referenceF= '$referenceF'";
+		$db = config::getConnexion();
+        $req=$db->prepare($sql);
+		$req->bindValue(':referenceF',$referenceF);
+		try{
+            $req->execute();
+           // header('Location: index.php');
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
 	
 	public static function modifierFournisseur($referenceF,$argument,$valeur){
 		$sql="UPDATE fournisseur SET ".$argument."=:".$argument." WHERE referenceF=:referenceF";
@@ -127,6 +152,29 @@ $sql="SELECT * from fournisseur where referenceF='$referenceF'";
             die('Erreur: '.$e->getMessage());
         }
 	}
+	function rechercherFournisseurRetard(){
+$sql="SELECT nom,retard from fournisseur where retard=3";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
+	function rechercherFournisseur2($recherche){
+$sql="SELECT * from fournisseur where  referenceF like '%$recherche%' or nom like '%$recherche%' or telephone like '%$recherche%'or email like '%$recherche%'or type_produit like '%$recherche%'";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
+	
 
 	
 }
@@ -145,4 +193,5 @@ function recupererEmail($referenceF){
             die('Erreur: '.$e->getMessage());
         }
 	}
+
 ?>

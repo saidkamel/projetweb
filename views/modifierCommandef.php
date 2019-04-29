@@ -1,6 +1,7 @@
 <?PHP
 include "../entities/Commandef.php";
 include "../core/CommandefC.php";
+include "../core/fournisseurC.php";
 
 if (isset($_POST['modifier']) and !empty($_POST["referenceC"])){
 	extract($_POST);
@@ -30,7 +31,12 @@ if(isset($_POST["datec"])){
 	if(isset($_POST["etat"])){
 	if(!empty($_POST["etat"])){
 		CommandefC::modifierCommandef($_POST["referenceC"],"etat",$etat);
+		if($_POST["etat"]=="Arrivée")
+		{
+		$Fournisseur1C=new FournisseurC();
+		$Fournisseur1C->resetRetard($_POST["ref_fournisseur"]);	
 			header('Location: ../Commandef.php?operation=update');
+		}
 	}
 	}
 }

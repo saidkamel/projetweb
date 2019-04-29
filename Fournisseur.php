@@ -34,6 +34,37 @@ include "core/fournisseurC.php"; ?>
         <script src="vendors/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script type="text/javascript" src="JS/jquery.min.js"></script>
 		<script type="text/javascript" src="JS/verifajoutfournisseur.js"></script>
+		
+	<script type="text/javascript">
+  function notifyMe() {
+  if (!("Notification" in window)) {
+    alert("This browser does not support system notifications");
+  }
+  else if (Notification.permission === "granted") {
+    notify();
+  }
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      if (permission === "granted") {
+        notify();
+      }
+    });
+  }
+  
+  function notify() {
+    var notification = new Notification('Avis', {
+      icon: '../notifier.png',
+      body: "Commande envoyée avec succé!",
+
+    });
+
+    setTimeout(notification.close.bind(notification), 7000); 
+  }
+
+}
+</script>
+
+	
     </head>
     <body>
         <div class="navbar navbar-fixed-top">
@@ -203,8 +234,10 @@ include "core/fournisseurC.php"; ?>
                             The operation completed successfully</div>';
                             
                                     }
+									
 
                                     ?>
+									
                                    <form method="POST" action="views/ajoutFournisseur.php" enctype="multipart/form-data">
                                       <fieldset>
                                         <legend>Ajouter fournisseur</legend>
@@ -267,7 +300,7 @@ include "core/fournisseurC.php"; ?>
                                    
                                         
                                         <div class="form-actions">
-                                          <button  type="submit" name="ajouter" value="ajouter" id="butajout" class="btn btn-primary">Ajouter</button>
+                                          <button  type="submit" name="ajouter" value="ajouter" id="butajout"  class="btn btn-primary">Ajouter</button>
                                           <button type="reset" class="btn">Annuler</button>
                                         </div>
                                       </fieldset>
@@ -350,7 +383,7 @@ foreach($listefournisseur as $row){
 									<div class="control-group">
                                           <label class="control-label" for="typeahead">Email</label>
                                           <div class="controls">
-                                            <input type="email" class="span6" id="mail" name="email" data-provide="typeahead" >
+                                            <input type="email" class="span6" id="mail" name="email"  >
 											 <div class="error-message">erreur</div>
                                           </div>
 
@@ -358,7 +391,7 @@ foreach($listefournisseur as $row){
                                         <div class="control-group">
                                           <label class="control-label" for="typeahead">telephone</label>
                                           <div class="controls">
-                                            <input type="number" class="span6" id="telephone" name="telephone" data-provide="typeahead" >
+                                            <input type="number" class="span6" id="telephone" name="telephone"  >
 											
 											<div class="error-message">erreur</div>
                                           </div>
@@ -436,11 +469,11 @@ foreach($listefournisseur as $row){
                                           <br />
                                                                              <div class="form-actions">
                                           <button type="submit" onclick="envoyermodifier();" name="supprimer" value="supprimer"  class="btn btn-primary">Supprimer</button>
-                                          <button type="reset" class="btn">Annuler</button>
+                                          
                                         </div>
                                       </fieldset>
                                     </form>
-
+<br><br><br><br><br><br>
                                 </div>
                         </div>
                     </div>
